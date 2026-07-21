@@ -1,13 +1,21 @@
 import { MenuItem, Category, Testimonial } from './types';
 
-// Images directly mapped from /src/assets/images
-export const HERO_BANNER_IMAGE = '/src/assets/images/samosa_hero_banner_1784205311034.jpg';
-export const CHICKEN_ROLLS_IMAGE = '/src/assets/images/rolls.jpg';
-export const STREET_FOOD_SNACKS_IMAGE = '/src/assets/images/cutlets.webp';
-export const SAMOSA_MOCK_IMAGE = '/src/assets/images/samosa.webp';
-export const ROLL_MOCK_IMAGE = '/src/assets/images/rolls.jpg';
+// ✅ Images ko direct import karein (Vite automatically correct URL banayega)
+import HERO_BANNER_IMAGE from './assets/images/samosa_hero_banner_1784205311034.jpg';
+import CHICKEN_ROLLS_IMAGE from './assets/images/rolls.jpg';
+import STREET_FOOD_SNACKS_IMAGE from './assets/images/cutlets.webp';
+import SAMOSA_MOCK_IMAGE from './assets/images/samosa.webp';
+import ROLL_MOCK_IMAGE from './assets/images/rolls.jpg';
+import LOGO_IMAGE from './assets/images/Logo.png';
 
-export const LOGO_IMAGE = '/src/assets/images/Logo.png';
+export {
+  HERO_BANNER_IMAGE,
+  CHICKEN_ROLLS_IMAGE,
+  STREET_FOOD_SNACKS_IMAGE,
+  SAMOSA_MOCK_IMAGE,
+  ROLL_MOCK_IMAGE,
+  LOGO_IMAGE,
+};
 
 export const CATEGORIES: Category[] = [
   {
@@ -16,6 +24,7 @@ export const CATEGORIES: Category[] = [
     description: 'Legendary triangular pockets of joy.',
     image: SAMOSA_MOCK_IMAGE,
   },
+  // ... Baqi data same rahega
   {
     id: 'rolls',
     name: 'Rolls',
