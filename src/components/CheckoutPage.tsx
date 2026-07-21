@@ -1,5 +1,5 @@
 import { useState, useEffect, FormEvent } from 'react';
-import { CartItem, OrderDetails } from '../types';
+import { CartItem } from '../types';
 
 interface CheckoutPageProps {
   cart: CartItem[];
@@ -10,7 +10,6 @@ interface CheckoutPageProps {
 
 export default function CheckoutPage({
   cart,
-  onUpdateQuantity,
   onClearCart,
   setActiveTab,
 }: CheckoutPageProps) {
@@ -19,7 +18,7 @@ export default function CheckoutPage({
   const [phoneNumber, setPhoneNumber] = useState('');
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryNotes, setDeliveryNotes] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState<'cod' | 'online'>('cod');
+  const [paymentMethod] = useState<'cod'>('cod');
 
   // Form validation errors
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -76,13 +75,12 @@ export default function CheckoutPage({
       customer_phone: phoneNumber,
       customer_address: deliveryAddress,
       delivery_notes: deliveryNotes,
-      order_details: `Items: ${orderItemsString} | Payment: ${paymentMethod === 'cod' ? 'Cash on Delivery' : 'Online'} | Total Bill: Rs ${grandTotal}`,
+      order_details: `Items: ${orderItemsString} | Payment: Cash on Delivery | Total Bill: Rs ${grandTotal}`,
       email: "ahadtariq616@gmail.com", // Aapka apna email address
       name: fullName // Customer ka naam (dashboard variables ke liye)
     };
 
     // EmailJS Send Request
-    // Note: Yahan 'x0relpn' Template ID use ki gayi hai jo aapke screenshot mein thi
     emailjs.send('service_ozigr0m', 'template_mc7yaar', templateParams, 'qcG4Z7BmGHlbVFdfQ')
       .then(() => {
         const generatedId = `WUS-${Math.floor(100000 + Math.random() * 900000)}`;
@@ -131,7 +129,7 @@ export default function CheckoutPage({
               <span className="text-xs text-on-surface-variant uppercase tracking-wider font-bold">Status</span>
               <p className="font-display text-sm font-extrabold text-primary uppercase">
                 {orderStep === 0 && 'Order Received'}
-                {orderStep === 1 && 'Samosas Baking / Frying'}
+                {orderStep === 1 && 'Packing Fresh Samosas'}
                 {orderStep === 2 && 'Out for Quick Delivery'}
                 {orderStep === 3 && 'Arrived Hot & Fresh!'}
               </p>
@@ -164,9 +162,9 @@ export default function CheckoutPage({
                     ? 'bg-secondary border-secondary text-white animate-pulse' 
                     : 'bg-white border-outline-variant text-on-surface-variant'
                 }`}>
-                  <span className="material-symbols-outlined text-sm font-bold">local_fire_department</span>
+                  <span className="material-symbols-outlined text-sm font-bold">inventory_2</span>
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-wide text-on-surface text-center">Baking</span>
+                <span className="text-[10px] font-bold uppercase tracking-wide text-on-surface text-center">Packing</span>
               </div>
 
               <div className="flex flex-col items-center space-y-2">
@@ -219,7 +217,7 @@ export default function CheckoutPage({
             )}
             <div>
               <p className="font-bold text-on-surface uppercase">Payment Mode</p>
-              <p className="capitalize font-bold text-secondary">{paymentMethod === 'cod' ? 'Cash on Delivery' : 'Online Payment'}</p>
+              <p className="capitalize font-bold text-secondary">Cash on Delivery</p>
             </div>
             <div>
               <p className="font-bold text-on-surface uppercase">Total Paid</p>
@@ -349,57 +347,22 @@ export default function CheckoutPage({
               <h2 className="font-display text-xl font-extrabold text-on-surface">Payment Method</h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <label 
-                className={`relative flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                  paymentMethod === 'cod' 
-                    ? 'border-primary bg-primary-fixed/20 shadow-sm' 
-                    : 'border-outline-variant bg-white hover:border-primary/50'
-                }`}
-              >
+            <div>
+              <label className="relative flex items-center p-4 rounded-xl border-2 border-primary bg-primary-fixed/20 shadow-sm cursor-pointer">
                 <input 
                   type="radio" 
                   name="payment" 
-                  checked={paymentMethod === 'cod'} 
-                  onChange={() => setPaymentMethod('cod')} 
+                  checked={true} 
+                  readOnly
                   className="hidden" 
                 />
                 <div className="flex items-center gap-4">
-                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                    paymentMethod === 'cod' ? 'border-primary' : 'border-outline-variant'
-                  }`}>
-                    {paymentMethod === 'cod' && <div className="w-2.5 h-2.5 bg-primary rounded-full"></div>}
+                  <div className="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
+                    <div className="w-2.5 h-2.5 bg-primary rounded-full"></div>
                   </div>
                   <div>
                     <p className="font-display font-extrabold text-sm text-on-primary-fixed">Cash on Delivery</p>
                     <p className="text-[11px] text-on-primary-fixed-variant opacity-80 font-sans">Pay when you receive</p>
-                  </div>
-                </div>
-              </label>
-
-              <label 
-                className={`relative flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                  paymentMethod === 'online' 
-                    ? 'border-primary bg-primary-fixed/20 shadow-sm' 
-                    : 'border-outline-variant bg-white hover:border-primary/50'
-                }`}
-              >
-                <input 
-                  type="radio" 
-                  name="payment" 
-                  checked={paymentMethod === 'online'} 
-                  onChange={() => setPaymentMethod('online')} 
-                  className="hidden" 
-                />
-                <div className="flex items-center gap-4">
-                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                    paymentMethod === 'online' ? 'border-primary' : 'border-outline-variant'
-                  }`}>
-                    {paymentMethod === 'online' && <div className="w-2.5 h-2.5 bg-primary rounded-full"></div>}
-                  </div>
-                  <div>
-                    <p className="font-display font-extrabold text-sm text-on-surface">Online Payment</p>
-                    <p className="text-[11px] text-on-surface-variant opacity-80 font-sans">UPI, Cards, Netbanking</p>
                   </div>
                 </div>
               </label>
