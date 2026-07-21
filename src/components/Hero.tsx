@@ -58,8 +58,8 @@ export default function Hero({ onOrderNow, onViewMenu }: HeroProps) {
             <span className="material-symbols-outlined text-primary text-3xl font-bold">local_fire_department</span>
           </div>
           <div>
-            <h3 className="font-display font-bold text-on-surface">Hot &amp; Fresh</h3>
-            <p className="text-xs text-on-surface-variant font-sans">Straight from the wok</p>
+            <h3 className="font-display font-bold text-on-surface">Freezer to Fryer</h3>
+            <p className="text-xs text-on-surface-variant font-sans">Crispy & hot whenever you want</p>
           </div>
         </div>
 
