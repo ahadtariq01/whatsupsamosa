@@ -58,7 +58,7 @@ export const MENU_ITEMS: MenuItem[] = [
     image: SAMOSA_MOCK_IMAGE,
     category: 'Samosas',
     tags: ['Best Seller', 'Medium', 'Non-Veg'],
-    customizationOptions: ['Frozen (to bake/fry)', 'Freshly Fried', 'Mint Chutney'],
+    customizationOptions: ['Frozen (to bake/fry)','Mint Chutney'],
   },
   {
     id: 'chicken-potato-cutlets',
@@ -68,7 +68,7 @@ export const MENU_ITEMS: MenuItem[] = [
     image: STREET_FOOD_SNACKS_IMAGE,
     category: 'Snacks',
     tags: ['Mild', 'Popular'],
-    customizationOptions: ['Extra Dip', 'Chili Flakes', 'Double Crispy'],
+    customizationOptions: ['Chili Flakes', 'Double Crispy'],
   },
 ];
 
