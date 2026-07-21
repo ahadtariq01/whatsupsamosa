@@ -1,0 +1,8 @@
+{
+  "name": "Whats Up Samosa",
+  "description": "Crispy, spicy, and delicious samosas and rolls delivered hot right to your doorstep. Browse our menu, customize your order, and checkout seamlessly.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
